@@ -79,12 +79,26 @@ div.centercontainer{
 
 div.center{
   background-color: #242540;
-  padding: 7px;
+  padding: 2px;
   margin-bottom: 5px;
   border-radius: 5px;
   border-color: black;
   border-style: solid;
   border-width: 2px;
+}
+
+div.centerContents{
+  vertical-align: top;
+  display: inline-block;
+  padding: 5px;
+}
+
+.floatRight{
+  float: right;
+}
+
+.inlineCenter{
+  display: inline-block;
 }
 
 .searchBar{
@@ -93,6 +107,7 @@ div.center{
   height: 20px;
   border-radius: 5px;
   outline: none;
+  margin-top: 27px;
 }
 
 
