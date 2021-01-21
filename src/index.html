@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<script src = "newsApi.js"></script>
+
 <html>
   <head>
     <meta charset="UTF-8">
     <title>Stock Tracker</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" type="text/css" href="https://code.highcharts.com/css/stocktools/gui.css">
+    <link rel="stylesheet" type="text/css" href="https://code.highcharts.com/css/annotations/popup.css">
+
+    <!-- JQuery and Others Installation-->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    
+    
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+    <script src="https://code.highcharts.com/stock/indicators/indicators-all.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
+    <script src="https://code.highcharts.com/modules/annotations-advanced.js"></script>
+    <script src="https://code.highcharts.com/modules/price-indicator.js"></script>
+    <script src="https://code.highcharts.com/modules/full-screen.js"></script>
+    <script src="https://code.highcharts.com/modules/stock-tools.js"></script>
+    
+
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+    
+    
+    <script>if (window.module) module = window.module;</script>
+    <!-- End of JQuery Installation-->
+
+    <script src = "newsApi.js"></script>
+    <script src = "mainPage.js"></script>
+    <script src = "getChart.js"></script>
+
+    <script>
+      $(document).ready(function(){
+        $("button").click(function(){
+          var yahooFinance = require('yahoo-finance');
+          yahooFinance.quote({
+            symbol: 'AAPL',
+            modules: [ 'price', 'summaryDetail']
+            
+          }, function (err, quote){
+            console.log(quote);
+          });
+        });
+      });
+    </script>
+    
   </head>
   <body>
     <div class = "container">
@@ -13,10 +58,25 @@
         <div class = "leftCard">
           <h1>Hello, [Username]!</h1>
           <p>Your portfolio: N/A</p>
+          <button type="button">Test jQuery Code</button>
         </div>
   
         <div class = "left">
-          <h1>Current Holdings:</h1>
+          <h1 class="center">Current Holdings:</h1>
+          <table class= "center">
+            <tr>
+              <th>Symbol</th>
+              <th>% of Holdings</th>
+            </tr>
+            <tr>
+              <td>Apple</td>
+              <td>30%</td>
+            </tr>
+            <tr>
+              <td>Tesla</td>
+              <td>15%</td>
+            </tr>
+          </table>
           <p id="idiot">Apple: 30% <br> Tesla: 15% <br> etc.</p>
         </div>
 
@@ -36,7 +96,7 @@
           </div>
 
           <div class="centerContents floatRight">
-            <input type="text" class ="searchBar inlineCenter" placeholder="Type a Ticker">
+            <input id = "search" type="text" class ="searchBar inlineCenter" placeholder="Type a Ticker" spellcheck="false">
           </div>
 
         </div>
@@ -46,11 +106,12 @@
           <marquee behavior="scroll" direction="left"><p class ="" id ="trendingPage"></p></marquee>
         </div>
 
+        <div id= "stockName"></div>
+
+        <div class = "stock" id = "stock"></div>
+
       </div>
 
-      <div>
-
-      </div>
     </div>
   </body>
 </html>
